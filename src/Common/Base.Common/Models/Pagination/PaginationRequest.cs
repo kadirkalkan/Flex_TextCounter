@@ -19,8 +19,8 @@ public class PaginationRequest
         PageSize = pageSize;
     }
 
-    public int CurrentPage { get; set; }
-    public int PageSize { get; set; }
+    public int CurrentPage { get; set; } = 1;
+    public int PageSize { get; set; } = 1;
 
     [BindNever]
     public int Skip => (CurrentPage - 1) * PageSize;

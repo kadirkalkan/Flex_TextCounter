@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Base.Api.Application.Interfaces;
 
-public interface ITextService
+public interface IHttpService
 {
+    Task<string> SendGetAsync(string url);
 }

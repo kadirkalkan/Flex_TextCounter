@@ -1,10 +1,14 @@
 using FluentValidation.AspNetCore;
 using Base.Api.Application.Extensions;
+using Base.Common.Models.Constants;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add Custom Serilog
+builder.Host.UseCustomSerilog();
 
+
+// Add services to the container
 builder.Services
     .AddControllers();
 
@@ -18,6 +22,11 @@ builder.Services.AddSwaggerGen();
 // Calling Custom AddApplicationRegistration For FluentValidation and MetiatR services.
 builder.Services.AddApplicationRegistration();
 
+// Enable HealthCheck
+builder.Services.AddHealthChecks();
+
+builder.Services.AddHttpClient(HttpConstants.TextApiClientName);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,6 +35,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Adding HealthCheck endpoint for monitoring
+app.UseCustomHealthCheck();
+
+// Adding Custom Middlewares
+app.UseCustomMiddleWares();
+
+// Adding Response Caching 
+app.UseResponseCaching();
 
 app.UseHttpsRedirection();
 

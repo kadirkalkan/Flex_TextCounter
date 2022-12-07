@@ -11,6 +11,11 @@ namespace Base.Common.Models.CQRS.Queries.Request.Text;
 
 public class TextGetWordCountsQueryRequest : PaginationRequest, IRequest<PaginationResponse<TextGetWordCountsQueryResponse>>
 {
+    public TextGetWordCountsQueryRequest()
+    {
+
+    }
+
     public TextGetWordCountsQueryRequest(int currentPage, int pageSize) : base(currentPage, pageSize)
     {
     }

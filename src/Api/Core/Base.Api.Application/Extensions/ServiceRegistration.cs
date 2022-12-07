@@ -9,10 +9,13 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Http;
 
 namespace Base.Api.Application.Extensions;
 
-public static class Registration
+public static class ServiceRegistration
 {
     public static IServiceCollection AddApplicationRegistration(this IServiceCollection services)
     {
@@ -23,7 +26,9 @@ public static class Registration
         services.AddMediatR(assembly);
         services.AddValidatorsFromAssembly(assembly);
 
-        services.AddScoped<ITextService, TextService>();
+        services.AddLogging();
+
+        services.AddScoped<IHttpService, HttpService>();
 
         return services;
     }
